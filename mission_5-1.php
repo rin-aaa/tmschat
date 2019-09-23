@@ -17,7 +17,7 @@
 			$dsn = 'データベース名';
 			$user = 'ユーザー名';
 			$password = 'パスワード';
-			$pdo = new PDO($dsn, $user, $password, array(PDO::ATTR_ERRMODE => PDO::ERRMODE_WARNING));
+			$pdo = new PDO($dsn, $user, $password, array(PDO::ATTR_ERRMODE => PDO::ERRMODE_WARNING)); //new PDO: 接続の管理
 	
 	
 				
@@ -31,7 +31,7 @@
 				. ");";
 
 			$stmt = $pdo->query($sql);
-		
+
 			$sql = $pdo -> prepare("INSERT INTO tb_51 (name, comment, date, pass) VALUES (:name, :comment, :date, :pass)");
 
 
@@ -71,7 +71,7 @@
 						$date = $date1;
 						$pass = $pass1;
 
-						$sql -> execute();
+						$sql -> execute(); 
 					}
 				}
 				else {
@@ -85,10 +85,9 @@
 					$date = $date1;
 					$pass = "";
 
-					$sql -> execute();
+					$sql -> execute(); 
 				}
 			}
-
 
 
 			//削除フォーム
@@ -110,7 +109,6 @@
 			}
 
 
-		
 			//編集番号指定用フォーム
 			elseif (!empty($_POST['e_num']) && !empty($_POST['e_pass'])) {
 				$e_num = $_POST['e_num'];
@@ -119,7 +117,7 @@
 				$e_pass = $_POST['e_pass'];
 
 				$sql = 'select * from tb_51';
-				$stmt = $pdo->query($sql); 
+				$stmt = $pdo->query($sql);
 				$results = $stmt->fetchAll();
 				foreach ($results as $row){
 					if ($e_num == $row['id'] && $e_pass == $row['pass']) {
@@ -130,7 +128,6 @@
 					}
 				}
 			}
-
 
 		?>
 		
@@ -165,7 +162,7 @@
 		<?php
 
 			$sql = 'SELECT * FROM tb_51';
-			$stmt = $pdo->query($sql);
+			$stmt = $pdo->query($sql); 
 			$results = $stmt->fetchAll();
 			foreach ($results as $row){
 				echo $row['id'].':  ';
